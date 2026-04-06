@@ -1,0 +1,17 @@
+title: OpenLogistics
+emoji: 🚚
+color: blue
+sdk: docker
+port: 7860
+hardware: t4-small
+
+examples:
+  - title: Easy Delivery
+    api_url: /api/v1/reset
+    payload: '{"task_id": "easy_delivery"}'
+  - title: Medium Optimization
+    api_url: /api/v1/reset
+    payload: '{"task_id": "medium_optimization"}'
+  - title: Hard Crisis
+    api_url: /api/v1/reset
+    payload: '{"task_id": "hard_crisis"}'
