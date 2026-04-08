@@ -1,0 +1,64 @@
+openenv:
+  name: openlogistics
+  version: 1.0.0
+  description: "AI Supply Chain Optimization Environment"
+  category: optimization
+  difficulty:
+    - easy
+    - medium
+    - hard
+  
+  api:
+    entrypoint: app.main:app
+    protocol: rest
+    port: 7860
+  
+  models:
+    state:
+      type: StateModel
+    action:
+      type: ActionModel
+    step_output:
+      type: StepOutputModel
+  
+  tasks:
+    - id: easy_delivery
+      name: "Basic Delivery"
+      difficulty: easy
+      max_steps: 20
+      scoring:
+        method: ratio
+        metric: delivery_completion
+    - id: medium_optimization
+      name: "Multi-Order Optimization"
+      difficulty: medium
+      max_steps: 50
+      scoring:
+        method: weighted
+        weights:
+          delivery: 0.5
+          cost: 0.3
+          time: 0.2
+    - id: hard_crisis
+      name: "Crisis Management"
+      difficulty: hard
+      max_steps: 100
+      scoring:
+        method: adaptive
+        weights:
+          sla: 0.4
+          adaptability: 0.3
+          efficiency: 0.3
+  
+  constraints:
+    runtime_seconds: 1200
+    memory_mb: 8192
+    cpu_cores: 2
+  
+  requirements:
+    python: ">=3.10"
+    packages:
+      - fastapi>=0.104.0
+      - uvicorn>=0.24.0
+      - pydantic>=2.0.0
+      - numpy>=1.24.0
