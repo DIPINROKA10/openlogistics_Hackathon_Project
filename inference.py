@@ -1,17 +1,34 @@
 import os
-import requests
+from openai import OpenAI
 
+# Required environment variables
 API_BASE_URL = os.getenv("API_BASE_URL", "https://dipinroka-openlogistics-demo.hf.space")
-MODEL_NAME = os.getenv("MODEL_NAME", "default")
-HF_TOKEN = os.getenv("HF_TOKEN", "")
+MODEL_NAME = os.getenv("MODEL_NAME", "gpt-4o-mini")
+HF_TOKEN = os.getenv("HF_TOKEN")  # No default for HF_TOKEN!
+
+# optional
+LOCAL_IMAGE_NAME = os.getenv("LOCAL_IMAGE_NAME")
+
+client = OpenAI(
+    base_url=API_BASE_URL,
+    api_key=HF_TOKEN or "dummy"
+)
 
 def predict(inputs: dict) -> dict:
-    headers = {"Content-Type": "application/json"}
-    if HF_TOKEN:
-        headers["Authorization"] = f"Bearer {HF_TOKEN}"
-    response = requests.post(
-        f"{API_BASE_URL}/predict",
-        json=inputs,
-        headers=headers
+    print("START")
+    
+    print(f"STEP: Running prediction with model {MODEL_NAME}")
+    
+    response = client.chat.completions.create(
+        model=MODEL_NAME,
+        messages=[
+            {"role": "user", "content": str(inputs)}
+        ]
     )
-    return response.json()
+    
+    result = response.choices[0].message.content
+    print(f"STEP: Got result: {result}")
+    
+    print("END")
+    
+    return {"result": result}
