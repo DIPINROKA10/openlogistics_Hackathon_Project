@@ -1,0 +1,11 @@
+{
+  "name": "openlogistics-frontend",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "npx serve frontend -l 3000",
+    "start": "npx serve frontend -l 3000"
+  },
+  "dependencies": {
+    "serve": "^14.2.0"
+  }
+}
