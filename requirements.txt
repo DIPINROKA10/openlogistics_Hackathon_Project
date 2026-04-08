@@ -1,4 +1,8 @@
 requests==2.31.0
+<<<<<<< HEAD
+=======
+gradio>=4.0.0
+>>>>>>> a34c297eb8c81bb717a0743dd0bf583117618495
 fastapi==0.104.1
 uvicorn==0.24.0
 pydantic==2.5.0
